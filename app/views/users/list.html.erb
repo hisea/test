@@ -1,0 +1,12 @@
+<% content_for :title do %>Users<% end %>
+<h3>Here is the user list.  Please click on one to see messages.</h3>
+<br/>
+<% User.all.each do |user| %>
+  <p><%= link_to String(user.id) + '. ' + user.name, messages_list_path(user_id: user.id) %></p>
+<% end %>
+<br/>
+<%= form_tag("/api/users.json", method: "post") do %>
+  <%= label_tag(:add_user, "Add User:") %>
+  <%= text_field_tag("user[name]") %>
+  <%= submit_tag("Add") %>
+<% end %>

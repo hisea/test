@@ -1,0 +1,68 @@
+Welcome Avid Recruit
+====================
+
+Preparation
+-----------
+This application was built around the following technologies:
+
+Ruby 2.1.5
+Rails 4.2
+MySQL 5.6.22
+Node.js 0.10.25
+
+You may need to install compatible software versions if the application fails to function in your personal environment.
+
+Some of the principles in this Rails project were borrowed from the following source:
+https://codelation.com/blog/rails-restful-api-just-add-water
+
+Feel free to acquaint yourself with the referenced background information if it helps you to understand the code,
+although this is not manditory to proceed with this exercise.
+
+The database needs to be created by you using whatever connection information that works in your environment, however we
+should be able to plug in the original database.yml file for the app to run on our database.  The migrations provided
+are all that is needed to create the tables.
+
+Unit tests are driven by RSpec, for more info please visit http://rspec.info/
+
+
+Rules
+-----
+These are just some simple rules to facilitate the grading of this exercise:
+
+1. If you need to make any DB schema changes please include additional migrations in the existing folder, do not edit
+the original migrations.
+2. If you add any gems or third party code please provide a detailed explanation behind your reasoning to do so.
+3. Do not assume anything in this project is necessarily done correctly or uses recommended practices.  Your approach
+should be the same as working on a production ready project that you have inherited.  Remember that this is your chance
+to showcase your knowledge about enterprise class web applications, put your own mark on it to make it a robust and
+elegant looking site.
+
+
+Tasks
+-----
+1. The users page lists all users in the database.  It currently adds a user by posting to an API endpoint.  Make the
+following updates to the page:
+  a. Make the add user API request an Ajax call.
+  b. Update the list to include the new user without making another server request.
+
+2. Clicking on a user opens the messages page for that user.  Similarly to the user page it posts to an API endpoint to
+add messages for that user.  Make the following updates:
+  a. Make the add message API request an Ajax call.
+  b. Update the list to include the new message without making another server request.
+  c. Make the message list items clickable.  Clicking will display the body of the message to the right of the list
+  without refreshing the entire page.
+
+3. Update the user model and pages as follows:
+  a. Add birth date, gender, and country fields to the user model.  Countries supported are Canada and US.
+  b. Display age, gender, and country in the user list.
+  c. Update all Ajax and API endpoints as required to support the new fields.
+
+4. Using object oriented principles and test driven development add support to track user payments as follows:
+  a. Page to log a user purchase for a monthly subscription.
+  b. Facility to cancel and reactivate a subscription.
+  c. Business rules:
+      - Prices are charged in the user's local currency.
+      - Only one active subscription allowed per user.
+      - Cancelled subscription can be reactivated if within 24 hours of cancellation.
+      - Users can purchase a new subscription after 24 hours of cancelling.
+  d. All above functionality must be exposed through API endpoints.

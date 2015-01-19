@@ -1,0 +1,16 @@
+<% content_for :title do %>Messages<% end %>
+<h3>Here are the messages for <%= @user.name %></h3>
+
+<% @messages.each do |message| %>
+  <p><%= message.id %>. <%= message.subject %></p>
+<% end %>
+
+<%= form_tag("/api/messages.json", method: "post") do %>
+  <%= label_tag(:add_user, "Add Message:") %><br/>
+  Subject:<br/>
+  <%= text_field_tag("message[subject]") %><br/>
+  Body:<br/>
+  <%= text_area_tag("message[body]") %><br/>
+  <%= hidden_field_tag("message[user_id]", @user.id) %>
+  <%= submit_tag("Add") %>
+<% end %>
