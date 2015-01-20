@@ -1,6 +1,6 @@
 <% content_for :title do %>Messages<% end %>
 <h3>Here are the messages for <%= @user.name %></h3>
-<div data-ng-controller='MessageCtrl'>
+<div data-ng-controller='MessageCtrl' data-ng-init="init(<%= @user.id %>)">
   <div class="row">
     <div class="col-md-4">
       <div data-ng-repeat="message in messages">
@@ -14,14 +14,14 @@
       <div>{{selected_message.body}}</div>
     </div>
   </div>
-</div>
 
-<%= form_tag("/api/messages.json", method: "post") do %>
-  <%= label_tag(:add_user, "Add Message:") %><br/>
-  Subject:<br/>
-  <%= text_field_tag("message[subject]") %><br/>
-  Body:<br/>
-  <%= text_area_tag("message[body]") %><br/>
-  <%= hidden_field_tag("message[user_id]", @user.id) %>
-  <%= submit_tag("Add") %>
-<% end %>
+  <form>
+    <label>Add Message:</label><br/>
+    Subject:<br/>
+    <input type=r"text" data-ng-model="newMessage.subject" /><br/>
+    Body:<br/>
+    <input type="textarea" data-ng-model="newMessage.body" /><br/>
+    <button data-ng-click="create()">Add</button>
+  </form>
+
+</div>

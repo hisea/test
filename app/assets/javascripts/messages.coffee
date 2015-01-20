@@ -5,9 +5,13 @@
 app = angular.module('App')
 
 app.controller 'MessageCtrl', ['$scope', 'MessageService', ($scope, MessageService) ->
+  $scope.init = (user_id)->
+    $scope.user_id = user_id
+    $scope.load()
+
   $scope.load = ->
     $scope.selected_message = {}
-    MessageService.index(1)
+    MessageService.index($scope.user_id)
       .success (response)->
         $scope.messages = response.messages
 
@@ -15,19 +19,28 @@ app.controller 'MessageCtrl', ['$scope', 'MessageService', ($scope, MessageServi
     $scope.selected_message = message
 
   $scope.create = ->
-    MessageService.create($scope.newUser)
+    $scope.newMessage.user_id = $scope.user_id
+    MessageService.create($scope.newMessage)
       .success (response) ->
-        $scope.newUser = {}
+        $scope.newMessage = {}
         $scope.load()
-  $scope.load()
 ]
 
 app.factory 'MessageService', ($http, $q) ->
   factory = {}
   factory.index = (user_id)->
-    $http.get('/api/messages.json', {'user_id': user_id})
+    $http(
+      'method': 'GET'
+      'url': '/api/messages.json',
+      'params':
+        'user_id': user_id
+    )
 
-  factory.create = (user) ->
-    $http.post('/api/users.json', user)
+  factory.create = (newMessage) ->
+    $http(
+      'url': '/api/messages.json',
+      'method': 'POST',
+      'data': newMessage
+    )
 
   factory
