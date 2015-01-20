@@ -1,9 +1,20 @@
 <% content_for :title do %>Messages<% end %>
 <h3>Here are the messages for <%= @user.name %></h3>
-
-<% @messages.each do |message| %>
-  <p><%= message.id %>. <%= message.subject %></p>
-<% end %>
+<div data-ng-controller='MessageCtrl'>
+  <div class="row">
+    <div class="col-md-4">
+      <div data-ng-repeat="message in messages">
+        <a href="" data-ng-click="select(message)">
+          <p>{{message.id}}. {{message.subject}}</p>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h4>{{selected_message.subject}}</h4>
+      <div>{{selected_message.body}}</div>
+    </div>
+  </div>
+</div>
 
 <%= form_tag("/api/messages.json", method: "post") do %>
   <%= label_tag(:add_user, "Add Message:") %><br/>

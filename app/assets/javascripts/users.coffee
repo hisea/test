@@ -4,28 +4,27 @@
 
 app = angular.module('App', [])
 
-app.controller 'UserCtrl', ['$scope', '$http', ($scope, $http) ->
-
+app.controller 'UserCtrl', ['$scope', 'UserService', ($scope, UserService) ->
   $scope.load = ->
-    $http.get('api/users.json')
+    UserService.index()
       .success (response)->
         $scope.users = response.users
 
   $scope.create = ->
-    $http.post('api/users.json',$scope.newUser)
+    UserService.create($scope.newUser)
       .success (response) ->
         $scope.newUser = {}
         $scope.load()
+
   $scope.load()
 ]
 
-# angular.module('App').service 'UserService', ($http, $q) ->
-#   return
-#     'create': create,
-#     'get', get,
-#     'index', index
+app.factory 'UserService', ($http, $q) ->
+  userService = {}
+  userService.index = ->
+    $http.get('/api/users.json')
 
-#   create = ->
-#     request = $http
-#       'method': 'post',
-#       'url': '/api/users.json'
+  userService.create = (user) ->
+    $http.post('/api/users.json', user)
+
+  userService
