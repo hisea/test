@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root to: 'visitors#index'
 
-  get 'users/list'
-  get 'messages/list'
-
   resources :users, only: %i{index} do
     resources :messages
   end
