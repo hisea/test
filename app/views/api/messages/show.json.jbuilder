@@ -1,6 +1,3 @@
 json.message do
-  json.id    @message.id
-  json.subject @message.subject
-
-  json.user_id @message.user ? @message.user.id : nil
+  json.partial! 'message', message: @message
 end

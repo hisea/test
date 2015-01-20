@@ -1,4 +1,1 @@
-json.users @users do |user|
-  json.id   user.id
-  json.name user.name
-end
+json.users @users, partial: 'user', as: :user
