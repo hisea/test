@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get 'users/list'
   get 'messages/list'
 
+  resources :users, only: %i{index} do
+    resources :messages
+  end
+
   namespace :api do
     resources :messages, :users, except: [:new, :edit]
   end
@@ -13,5 +17,3 @@ Rails.application.routes.draw do
   get '/api/users/:id', to: 'users#show', as: :user
 
 end
-
-

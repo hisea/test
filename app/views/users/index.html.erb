@@ -1,12 +1,16 @@
 <% content_for :title do %>Users<% end %>
 <h3>Here is the user list.  Please click on one to see messages.</h3>
 <br/>
-<% User.all.each do |user| %>
-  <p><%= link_to String(user.id) + '. ' + user.name, messages_list_path(user_id: user.id) %></p>
-<% end %>
-<br/>
+
+
+<div id="user-list">
+  <% @users.each do |user| %>
+    <p  data-react-class="User" data-react-props="<%= user.to_json %>" />
+  <% end %>
+</div>
+
 <%= form_tag("/api/users.json", method: "post") do %>
   <%= label_tag(:add_user, "Add User:") %>
   <%= text_field_tag("user[name]") %>
-  <%= submit_tag("Add") %>
+  <%= submit_tag("Add", id: "user-form-submit") %>
 <% end %>
