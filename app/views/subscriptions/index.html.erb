@@ -1,0 +1,18 @@
+<% content_for :title do %>Subscription<% end %>
+<h3>Here are the subscriptions for <%= @user.name %></h3>
+<div data-ng-controller='SubscriptionCtrl' data-ng-init="init(<%= @user.id %>)">
+  <h4>Active Subscription</h4>
+  <div id="active" data-ng-repeat="subscription in active">
+    <p>Subscription.{{subscription.id}} for ${{subscription.amount_paid}} {{subscription.currency_country.currency}}
+      <span data-ng-show="subscription.cancelled_at != null">- To Be Cancelled at: {{subscription.cancelled_at}}</span>
+    </p>
+    <button data-ng-click="cancel(subscription)" data-ng-show="subscription.cancelled_at == null">Cancel</button>
+    <button data-ng-click="reactivate(subscription)" data-ng-show="subscription.cancelled_at != null">Reactivate</button>
+  </div>
+  <div></div>
+  <button data-ng-click="create()" data-ng-show="active.length == 0">Subscribe for <%= "#{@user.country.currency} $#{SubscriptionPrice.for_country(@user.country).price}"  %></button>
+  <h4>Cancelled Subscription</h4>
+  <div id="cancelled" data-ng-repeat="subscription in cancelled">
+    <p>Subscription.{{subscription.id}} for ${{subscription.amount_paid}} {{subscription.currency_country.currency}} - Cancelled at: {{subscription.cancelled_at}}</p>
+  </div>
+</div>

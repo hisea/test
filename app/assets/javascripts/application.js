@@ -16,3 +16,4 @@
 //= require angular
 //= require users
 //= require messages
+//= require subscriptions

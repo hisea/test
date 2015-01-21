@@ -1,0 +1,6 @@
+json.id subscription.id
+json.user_id subscription.user_id
+json.activated_at subscription.activated_at
+json.cancelled_at subscription.cancelled_at
+json.amount_paid subscription.amount_paid
+json.currency_country subscription.currency_country

@@ -33,14 +33,21 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'timecop'
+  gem 'shoulda-matchers', require: false
+  gem 'guard', require: false
+  gem 'guard-rspec', require: false
 end
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
 group :test do
+  gem 'poltergeist'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'capybara-angular'
 end
