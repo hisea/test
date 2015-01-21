@@ -3,15 +3,40 @@
 <br/>
 
 <div data-ng-controller="UserCtrl" >
-  <div data-ng-repeat="user in users">
-    <a href="{{user.messages_url}}">
-      <p>{{user.id}}. {{user.name}}</p>
-    </a>
-  </div>
+  <table>
+    <tr>
+      <td>User</td>
+      <td>Age</td>
+      <td>Gender</td>
+      <td>Country</td>
+    </tr>
+    <tr data-ng-repeat="user in users">
+      <td>
+        <a href="{{user.messages_url}}">
+          {{user.id}}. {{user.name}}
+        </a>
+      </td>
+      <td>{{user.age}}</td>
+      <td>{{user.gender}}</td>
+      <td>{{user.country.name}}</td>
+    </tr>
+  </table>
 
   <form>
-    <label>Add User:</label>
-    <input type="text" data-ng-model="newUser.name"/>
+    <label>Add User:</label><br />
+    <label>Name:</label>
+    <input type="text" data-ng-model="newUser.name"/><br />
+    <label>Age:</label>
+    <input type="number" data-ng-model="newUser.age"/><br />
+    <label>Gender:</label>
+    <input type="radio" data-ng-model="newUser.gender" value="male"> Male
+    <input type="radio" data-ng-model="newUser.gender" value="female"> Female <br/>
+    <label>Country</label>
+    <select data-ng-model="newUser.country_id">
+      <% Country.all.each do |country| %>
+      <option value="<%= country.id %>"><%= country.name %></option>
+      <% end %>
+    </select><br />
     <button data-ng-click="create()">Add</button>
   </form>
 </div>

@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114010734) do
+ActiveRecord::Schema.define(version: 20150120221520) do
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name",     limit: 255
+    t.string "code",     limit: 255
+    t.string "currency", limit: 255
+  end
 
   create_table "messages", force: :cascade do |t|
     t.string   "subject",    limit: 255
@@ -27,7 +33,13 @@ ActiveRecord::Schema.define(version: 20150114010734) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "age",        limit: 4
+    t.string   "gender",     limit: 255
+    t.integer  "country_id", limit: 4
   end
 
+  add_index "users", ["country_id"], name: "fk_rails_c3b920faa0", using: :btree
+
   add_foreign_key "messages", "users"
+  add_foreign_key "users", "countries"
 end

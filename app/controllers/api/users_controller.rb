@@ -3,7 +3,7 @@ class Api::UsersController < Api::BaseController
   private
 
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :age, :gender, :country_id)
   end
 
   def query_params
